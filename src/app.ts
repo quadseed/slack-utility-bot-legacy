@@ -41,7 +41,7 @@ app.command('/release', async ({ ack, body, client, logger }) => {
   }
 });
 
-app.action<BlockAction>("button-join", async ({ ack, respond, payload, body, action, client, context }) => {
+app.action<BlockAction>("button-join", async ({ ack, respond, body }) => {
   await ack();
   const originalBlocks = body.message['blocks']
 
