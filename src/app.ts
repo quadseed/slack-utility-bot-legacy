@@ -16,12 +16,6 @@ const app = new App({
   port: 3000
 })
 
-app.message('hello', async ({ message, say }) => {
-  await say({
-    text: "hogehoge--"
-  });
-});
-
 app.command('/release', async ({ ack, body, client, logger }) => {
   await ack();
 
@@ -47,17 +41,12 @@ app.action<BlockAction>("button-join", async ({ ack, respond, body }) => {
 
   let userList = getUserList(originalBlocks[7]['text']['text'])
 
-  console.log(userList)
-
   if (userList.includes(`<@${body.user.id}>`) || userList[0] == `<@${body.user.id}>`) {
-    console.log("a")
     userList = userList.filter(x => { return !x.includes(`<@${body.user.id}>`)})
-    console.log(userList)
 
     originalBlocks[7]['text']['text'] = "*参加者* : `" + userList.length + "`\n " + userList.join()
     await respond({blocks: originalBlocks, replace_original: true});
   } else {
-    console.log("b")
     userList.push(`<@${body.user.id}>`)
 
     originalBlocks[7]['text']['text'] = "*参加者* : `" + userList.length + "`\n " + userList.join()
