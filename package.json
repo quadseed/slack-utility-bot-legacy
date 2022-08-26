@@ -1,0 +1,24 @@
+{
+  "name": "nlab-event-bot",
+  "version": "1.0.0",
+  "description": "event release bot for NLab",
+  "main": "app.ts",
+  "author": "quadseed",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "ts-node src/app.ts",
+    "dev": "nodemon"
+  },
+  "dependencies": {
+    "@slack/bolt": "^3.12.1",
+    "dayjs": "^1.11.5",
+    "dotenv": "^16.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.13",
+    "nodemon": "^2.0.19",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  }
+}
