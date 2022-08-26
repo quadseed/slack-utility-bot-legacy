@@ -1,4 +1,4 @@
-import { App, BlockAction, InteractiveButtonClick, InteractiveMessage } from "@slack/bolt"
+import { App, BlockAction, InteractiveButtonClick } from "@slack/bolt"
 import "dotenv/config"
 import dayjs from "dayjs"
 import "dayjs/locale/ja"
