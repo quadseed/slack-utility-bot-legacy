@@ -1,7 +1,7 @@
 {
-  "name": "nlab-event-bot",
+  "name": "slack-utility-bot",
   "version": "1.0.0",
-  "description": "event release bot for NLab",
+  "description": "slack utility bot",
   "main": "app.ts",
   "author": "quadseed",
   "license": "MIT",
