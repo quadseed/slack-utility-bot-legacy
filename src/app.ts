@@ -97,6 +97,7 @@ app.view('release_command_modal', async ({ ack, body, view, client, logger }) =>
   try {
     await client.chat.postMessage({
       channel: channel_id,
+      text: `イベント告知: ${title}`,
       blocks: getReleaseBlockComponent({title, detail, remarks, mention, date, time})
     });
     logger.info(body)
