@@ -39,7 +39,7 @@ app.action<BlockAction>("button-join", async ({ ack, respond, body }) => {
   await ack();
   const originalBlocks = body.message['blocks']
 
-  let userList = getUserList(originalBlocks[7]['text']['text'])
+  let userList = getUserList('参加者* : `0`', originalBlocks[7]['text']['text'])
 
   if (userList.includes(`<@${body.user.id}>`) || userList[0] == `<@${body.user.id}>`) {
     userList = userList.filter(x => { return !x.includes(`<@${body.user.id}>`)})
