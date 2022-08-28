@@ -1,4 +1,4 @@
-import { App, BlockAction, InteractiveButtonClick } from "@slack/bolt"
+import { App, BlockAction } from "@slack/bolt"
 import "dotenv/config"
 import dayjs from "dayjs"
 import "dayjs/locale/ja"
@@ -37,6 +37,7 @@ app.command('/release', async ({ ack, body, client, logger }) => {
 
 app.action<BlockAction>("button-join", async ({ ack, respond, body }) => {
   await ack();
+
   const originalBlocks = body.message['blocks']
 
   let userList = getUserList('参加者* : `0`', originalBlocks[7]['text']['text'])
@@ -54,9 +55,24 @@ app.action<BlockAction>("button-join", async ({ ack, respond, body }) => {
   }
 });
 
-app.action<InteractiveButtonClick>('button-absence', async ({ ack, say }) => {
+app.action<BlockAction>('button-absence', async ({ ack, respond, body }) => {
   await ack();
-  await say('欠席 👍');
+ 
+  const originalBlocks = body.message['blocks']
+
+  let userList = getUserList('欠席者* : `0`', originalBlocks[8]['text']['text'])
+
+  if (userList.includes(`<@${body.user.id}>`) || userList[0] == `<@${body.user.id}>`) {
+    userList = userList.filter(x => { return !x.includes(`<@${body.user.id}>`)})
+
+    originalBlocks[8]['text']['text'] = "*欠席者* : `" + userList.length + "`\n " + userList.join()
+    await respond({blocks: originalBlocks, replace_original: true});
+  } else {
+    userList.push(`<@${body.user.id}>`)
+
+    originalBlocks[8]['text']['text'] = "*欠席者* : `" + userList.length + "`\n " + userList.join()
+    await respond({blocks: originalBlocks, replace_original: true});
+  }
 });
 
 app.view('release_command_modal', async ({ ack, body, view, client, logger }) => {
