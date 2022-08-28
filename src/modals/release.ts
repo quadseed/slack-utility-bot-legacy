@@ -11,7 +11,8 @@ type ReleaseProps = {
   remarks: string,
   mention: string,
   date: string,
-  time: string
+  time: string,
+  authorId: string
 }
 
 
@@ -175,7 +176,7 @@ export const getReleaseCommandModal = ({channel_id, today}: ReleaseCommandProps)
   return releaseCommandModal
 }
 
-export const getReleaseBlockComponent = ({title, detail, remarks, mention, date, time}: ReleaseProps) => {
+export const getReleaseBlockComponent = ({title, detail, remarks, mention, date, time, authorId}: ReleaseProps) => {
   const releaseBlockComponent = [
 		{
 			"type": "section",
@@ -253,7 +254,16 @@ export const getReleaseBlockComponent = ({title, detail, remarks, mention, date,
 				"value": "click_me_123",
 				"action_id": "button-absence"
 			}
-		}
+		},
+    {
+			"type": "context",
+			"elements": [
+				{
+					"type": "mrkdwn",
+					"text": `<@${authorId}>が作成`
+				}
+			]
+		}    
 	]
 
   return releaseBlockComponent

@@ -94,11 +94,13 @@ app.view('release_command_modal', async ({ ack, body, view, client, logger }) =>
 
   const channel_id = view['private_metadata']
 
+  const authorId = body.user.id
+
   try {
     await client.chat.postMessage({
       channel: channel_id,
       text: `イベント告知: ${title}`,
-      blocks: getReleaseBlockComponent({title, detail, remarks, mention, date, time})
+      blocks: getReleaseBlockComponent({title, detail, remarks, mention, date, time, authorId})
     });
     logger.info(body)
   } catch (error) {
